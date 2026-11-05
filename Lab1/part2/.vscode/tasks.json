@@ -1,0 +1,66 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Build lab1",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-g",
+                "${workspaceFolder}/src/*.cpp",
+                "-o",
+                "${workspaceFolder}/app"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": "build",
+            "detail": "Compile every .cpp file in src/ into ./app"
+        },
+        {
+            "type": "shell",
+            "label": "Run lab1",
+            "command": "${workspaceFolder}/app",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": "Build lab1",
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Build, then run inside VS Code's terminal"
+        },
+   {
+    "type": "process",
+    "label": "Run lab1 (external window)",
+    "command": "ptyxis",
+    "args": [
+        "--title=lab1",
+        "--",
+        "bash",
+        "-c",
+        "\"${workspaceFolder}/app\"; echo; read -n 1 -s -r -p 'Press any key to close...'"
+    ],
+    "options": {
+        "cwd": "${workspaceFolder}"
+    },
+    "dependsOn": "Build lab1",
+    "problemMatcher": [],
+    "group": "build",
+    "detail": "Build, then run in a Ptyxis window"
+}
+    ]
+}
